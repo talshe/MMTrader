@@ -1,0 +1,24 @@
+{
+  "name": "core",
+  "projectType": "library",
+  "sourceRoot": "packages/core/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{workspaceRoot}/dist/packages/core"],
+      "options": {
+        "tsConfig": "packages/core/tsconfig.lib.json",
+        "main": "packages/core/src/index.ts",
+        "assets": []
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["packages/core/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["type:lib"]
+}
+

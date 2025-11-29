@@ -1,0 +1,32 @@
+{
+  "variables": [
+    {
+      "name": "stdDevMultiplier",
+      "min": 1.5,
+      "max": 2.5,
+      "step": 0.5
+    },
+    {
+      "name": "windowLength",
+      "min": 20,
+      "max": 60,
+      "step": 20
+    }
+  ],
+  "constants": {
+    "timezone": "America/New_York",
+    "startDate": "2024-01-01",
+    "endDate": "2024-12-31",
+    "assets": {
+      "assetA": {
+        "path": "YM/2024-01-01.csv",
+        "weight": 1
+      },
+      "assetB": {
+        "path": "ES/2024-01-01.csv",
+        "weight": -2
+      }
+    }
+  }
+}
+

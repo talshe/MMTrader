@@ -1,0 +1,31 @@
+{
+  "name": "trader",
+  "projectType": "application",
+  "sourceRoot": "apps/trader/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/node:build",
+      "outputs": ["{workspaceRoot}/dist/apps/trader"],
+      "options": {
+        "outputPath": "dist/apps/trader",
+        "main": "apps/trader/src/main.ts",
+        "tsConfig": "apps/trader/tsconfig.app.json",
+        "assets": []
+      }
+    },
+    "serve": {
+      "executor": "@nx/node:node",
+      "options": {
+        "buildTarget": "trader:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/trader/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["type:service"]
+}
+

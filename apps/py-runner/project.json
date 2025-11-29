@@ -1,0 +1,16 @@
+{
+  "name": "py-runner",
+  "projectType": "application",
+  "sourceRoot": "apps/py-runner",
+  "targets": {
+    "serve": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "command": "cd apps/py-runner && uvicorn src.main:app --reload",
+        "forwardAllArgs": true
+      }
+    }
+  },
+  "tags": ["type:python"]
+}
+

@@ -1,0 +1,37 @@
+{
+  "name": "web",
+  "projectType": "application",
+  "sourceRoot": "apps/web/src",
+  "targets": {
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "buildTarget": "web:build",
+        "port": 4200
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{workspaceRoot}/dist/apps/web"],
+      "options": {
+        "outputPath": "dist/apps/web"
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/web/**/*.ts",
+          "apps/web/**/*.tsx",
+          "apps/web/**/*.js",
+          "apps/web/**/*.jsx"
+        ]
+      }
+    }
+  },
+  "tags": ["type:web"]
+}
+
