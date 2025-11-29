@@ -37,7 +37,7 @@ class BacktestResult(BaseModel):
   datasetName: str
   startedAt: datetime
   completedAt: datetime
-  status: Literal['queued', 'running', 'failed', 'completed']
+  status: Literal['queued', 'running', 'failed', 'completed', 'cancelled']
   summary: BacktestSummary
   progress: list[BacktestProgressPoint]
   logs: list[str] = Field(default_factory=list)

@@ -32,7 +32,7 @@ export interface BacktestResult {
   datasetName: string;
   startedAt: string;
   completedAt?: string;
-  status: 'queued' | 'running' | 'failed' | 'completed';
+  status: 'queued' | 'running' | 'failed' | 'completed' | 'cancelled';
   summary?: BacktestResultSummary;
   progress: BacktestProgressPoint[];
   logs: string[];

@@ -42,7 +42,82 @@ This workspace hosts a React dashboard, a Node.js orchestration service, and a P
 
 Upload your tick files to `data/` (e.g., `ym_es_1s.csv`) and create runs from the dashboard.
 
+### Backtest API Endpoints
+
+The trader API provides full CRUD operations for backtest runs:
+
+**Create Backtest:**
+```bash
+POST /api/backtests
+Content-Type: application/json
+
+{
+  "datasetName": "ym_es_1s.csv",
+  "startDate": "2024-01-01T00:00:00",
+  "endDate": "2024-01-31T23:59:59",
+  "entryZ": 2.0,
+  "exitZ": 0.5,
+  "zScoreLookback": 60,
+  "legRatio": 1.0
+}
+```
+
+**List Backtests:**
+```bash
+GET /api/backtests
+```
+
+**Get Backtest:**
+```bash
+GET /api/backtests/:id
+```
+
+**Update Backtest Metadata:**
+```bash
+PATCH /api/backtests/:id
+Content-Type: application/json
+
+{
+  "datasetName": "ym_es_1s.csv",
+  "entryZ": 2.5
+  // ... any other fields to update
+}
+```
+Note: Cannot update running backtests. Only metadata updates are allowed (does not re-run the backtest).
+
+**Delete Backtest:**
+```bash
+DELETE /api/backtests/:id
+```
+Note: If the backtest is running, it will be cancelled first, then deleted. The status will be set to `cancelled` before deletion.
+
+### Database Setup
+
+The trader backend uses PostgreSQL to persist backtest runs. Before starting the service:
+
+1. Ensure PostgreSQL is running and accessible
+2. Create the backtests database:
+   ```bash
+   createdb moneymaker_trader
+   ```
+3. Run the schema migration:
+   ```bash
+   psql -d moneymaker_trader -f docs/backtests-db.sql
+   ```
+
 ### Environment variables
 
+**Trader API:**
 - `PY_SERVICE_URL` – override the Python runner URL (default `http://127.0.0.1:8001`)
+- `DB_HOST` – PostgreSQL host (default `localhost`)
+- `DB_PORT` – PostgreSQL port (default `5432`)
+- `TRADER_DB_NAME` – Database name for trader data (default `moneymaker_trader`, falls back to `DB_NAME`)
+- `DB_USER` – PostgreSQL user (default `postgres`)
+- `DB_PASSWORD` – PostgreSQL password (default `Shmsh001!`)
+- `DB_SSL` – Set to `'false'` to disable SSL (default SSL enabled)
+- `DB_MAX_CONNECTIONS` – Connection pool size (default `20`)
+- `DB_IDLE_TIMEOUT` – Idle timeout in milliseconds (default `30000`)
+- `DB_CONNECTION_TIMEOUT` – Connection timeout in milliseconds (default `30000`)
+
+**Web App:**
 - `VITE_TRADER_URL` – override the Trader API used by the web app (default `http://localhost:4000/api`)
